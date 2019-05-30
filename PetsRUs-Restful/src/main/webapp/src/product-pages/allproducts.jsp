@@ -5,7 +5,7 @@
 <html> 
     <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <title>jdbc test</title>
+        <title>All Products</title>
     </head> 
     <body> 
         
@@ -18,8 +18,8 @@
         final String DB_URL="jdbc:mysql://localhost:3306/petsrus?serverTimezone=UTC&autoReconnect=true&useSSL=false";
 
         /* database credentials */
-        final String USER = "root";
-        final String PASS = "root";
+        final String USER = "joey";
+        final String PASS = "123456789";
         
         /* database access */
         Class.forName("com.mysql.jdbc.Driver");
@@ -35,10 +35,10 @@
         out.println("<html lang=\"en\">");
         out.println("<head><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">");
         out.println("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">");
-        out.println("<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"src/styles.css\">");
-        out.println("<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"src/product-pages/products.css\">");
-        out.println("<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"assets/favicon.ico\"/>");
-        out.println("<script type=\"text/javascript\" src=\"src/product-pages/products.js\"></script>");
+        out.println("<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"../../src/styles.css\">");
+        out.println("<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"../../src/product-pages/products.css\">");
+        out.println("<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"../../../assets/favicon.ico\"/>");
+        out.println("<script type=\"text/javascript\" src=\"../../src/product-pages/products.js\"></script>");
         out.println("<title>Home</title></head>");
         
         /* start html body */
@@ -46,17 +46,17 @@
       
         /* nav bar */
         out.println("<div class=\"navbar2\">");
-        out.println("<a href=\"/PetsRUs-mvn\">Home</a>");
-        out.println("<a href=\"src/about.html\">About</a>");
+        out.println("<a href=\"/PetsRUs-Restful\">Home</a>");
+        out.println("<a href=\"../../src/about.html\">About</a>");
         out.println("<div class=\"dropdown2\">");
         out.println("<button class=\"dropbtn2\">Products");
         out.println("<i class=\"fa fa-caret-down\"></i>");
         out.println("</button>");
         out.println("<div class=\"dropdown-content2\">");
-        out.println("<a href=\"AllProducts\">All</a>");
-        out.println("<a href=\"src/product-pages/dog.html\">Dogs</a>");
-        out.println("<a href=\"src/product-pages/cat.html\">Cats</a>");
-        out.println("<a href=\"src/product-pages/reptile.html\">Reptiles</a>");
+        out.println("<a href=\"allproducts.jsp\">All Products</a>");
+        out.println("<a href=\"../../src/product-pages/dog.html\">Dogs</a>");
+        out.println("<a href=\"../../src/product-pages/cat.html\">Cats</a>");
+        out.println("<a href=\"../../src/product-pages/reptile.html\">Reptiles</a>");
         out.println("</div>");
         out.println("</div>");
         out.println("</div>");
@@ -68,7 +68,7 @@
         out.println("<div class=\"row\">");
         out.println("<div class=\"col-lg-12 px-0\">");
         out.println("<div style=\"text-align: center;\">");
-        out.println("<img src=\"assets/pets.png\" alt=\"dog-cover-photo\" class=\"cover-img\"/>");
+        out.println("<img src=\"../../assets/pets.png\" alt=\"dog-cover-photo\" class=\"cover-img\"/>");
         out.println("<div class=\"transparent-box\">All Pets</div></div></div>");
 
         /* main row */
@@ -99,7 +99,7 @@
             String benefits = rs.getString("benefits");
 
             out.println("<tr>");
-            out.println("<th scope=\"row\"><img src=\"assets/" + image_url + "\" alt=\"cat-food\" onclick=\"handleClick('" + id + "')\" class=\"product-img\"/></th>");
+            out.println("<th scope=\"row\"><img src=\"../../assets/" + image_url + "\" onclick=\"handleClick('" + id + "')\" class=\"product-img\"/></th>");
             out.println("<td class=\"text\">");
             out.println("<div class=\"product-title\">" + name + "</div>");
             out.println("<p>" + summary + "</p>");
