@@ -1,5 +1,5 @@
 package com.uci.petsrusservice.model;
-
+import javax.xml.bind.annotation.XmlRootElement;
 public class Product {
     
     /* class variables */
@@ -13,6 +13,30 @@ public class Product {
     private String summary;
     private String description;
     private String benefits;
+    
+    /* default constructor */
+    public Product () {
+        
+        /* do nothing */
+        
+    }
+    
+    /* constructor */
+    public Product (int id, String name, float price, String type, 
+            String category, String page_url, String image_url, String summary, 
+            String description, String benefits) {
+        
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.category = category;
+        this.page_url = page_url;
+        this.image_url = image_url;
+        this.summary = summary;
+        this.description = description;
+        this.benefits = benefits;
+    }
     
     /* id */
     public void setId(int id) {
@@ -79,7 +103,7 @@ public class Product {
     }
     
     /* description */
-    public void setDecription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     public String getDescription() {
