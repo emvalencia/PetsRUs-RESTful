@@ -24,33 +24,36 @@ public class ProductDBManager {
     private String dbUsername = "root";
     private String dbPassword = "root";
     private String jdbcDriver = "com.mysql.jdbc.Driver";  
-    private String query = "select * from products";
+    private String query = "select * from product";
     
     /* create collection to hold our products */
-    private ProductCollection productCollection;
+    private ProductCollection productCollection ;
     
     /* debugging flag */
     boolean debug = true;
     
+    // JDBC driver name and database URL
+    final String DB_URL="jdbc:mysql://localhost:3306/petsrus?serverTimezone=UTC";
+    final String USER = "root";
+    final String PASS = "root";
+    
     /* default constructor */
     public ProductDBManager() {
-        /* do nothing */
+        
+        /* establishes a new collection of products */
+        productCollection = new ProductCollection();
     }
     
     /* establishes connection with the MySQL database */
     public void initializeDBConnection() {
         
-        
-        if (debug) System.out.println("Attempting to establish database connection...\n");
+        System.out.println("Attempting to establish database connection...\n");
 
         try {
             Class.forName(jdbcDriver);
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/" + dbName
-                    + "", dbUsername, dbPassword
-            );
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
             
-            if (debug) System.out.println("Connection established\n");
+            if (conn != null) System.out.println("Connection established");
 
             /* creates a prepared statement and gets all the information */
             PreparedStatement ps = conn.prepareCall(query);
@@ -58,10 +61,7 @@ public class ProductDBManager {
             this.rsmd = rs.getMetaData();
             this.cols = rsmd.getColumnCount();
 
-            /* establishes a new collection of products */
-            ProductCollection productCollection = new ProductCollection();
-
-            resultSetObjectConversion();
+            resultSetObjectConversion(); 
 
             // rs.close();
             //conn.close();
@@ -72,13 +72,30 @@ public class ProductDBManager {
         }
     }
     
-    public ProductCollection getProductCollection() {
+    /* returns this manager's array of products */
+    public ProductCollection getProductCollection() {        
+        
+        /* establish db connection if not already established */
+        checkConnection();
+        
         return this.productCollection;
+    }
+    
+    /* returns a product's information */
+    public Product getProduct(int id) {
+        
+        /* establish db connection if not already established */
+        checkConnection();
+      
+        return productCollection.getProduct(id);
     }
     
     /* converts all products from the database to Product objects and adds them 
     to a ProductCollection */
     public void resultSetObjectConversion() {
+        
+        /* establish db connection if not already established */
+        checkConnection();
 
         try {
             while (rs.next()) {
@@ -104,4 +121,9 @@ public class ProductDBManager {
         }
     }
     
+    private void checkConnection() {
+        if (conn == null) {
+            initializeDBConnection();
+        }
+    }
 }

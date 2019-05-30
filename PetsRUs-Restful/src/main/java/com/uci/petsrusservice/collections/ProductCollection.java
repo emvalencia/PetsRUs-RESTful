@@ -37,4 +37,14 @@ public class ProductCollection {
         /* TODO */
     }
     
+    /* business methods */
+    public Product getProduct(int id) {
+        for(int i = 0; i < this.productCount; i++) {
+            if (productDatabase.get(i).getId() == id) {
+                return productDatabase.get(i);
+            }
+        }
+        return null;
+    }
+    
 }

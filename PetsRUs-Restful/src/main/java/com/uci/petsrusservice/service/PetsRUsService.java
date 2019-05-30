@@ -1,18 +1,10 @@
 package com.uci.petsrusservice.service;
 
-    
-//import uci.petsrus.db.DatabaseConnector;
-//import uci.petsrus.db.DatabaseUtils;
-import com.uci.petsrusservice.model.Product;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class PetsRUsService {
-
-    
-
-}
+/* required to hit the restful api with JAX-RS */
+@ApplicationPath("/api")
+public class PetsRUsService extends Application {
+    /* do nothing */
+} 
