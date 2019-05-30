@@ -20,11 +20,11 @@ public class ProductDBManager {
     private int cols = 0;
     
     /* database credentials */
-    private String dbName = "petsrus";
-    private String dbUsername = "root";
-    private String dbPassword = "root";
     private String jdbcDriver = "com.mysql.jdbc.Driver";  
     private String query = "select * from product";
+    private String DB_URL="jdbc:mysql://localhost:3306/petsrus??serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    private String USER = "root";
+    private String PASS = "root";
     
     /* create collection to hold our products */
     private ProductCollection productCollection ;
@@ -32,28 +32,24 @@ public class ProductDBManager {
     /* debugging flag */
     boolean debug = true;
     
-    // JDBC driver name and database URL
-    final String DB_URL="jdbc:mysql://localhost:3306/petsrus?serverTimezone=UTC";
-    final String USER = "root";
-    final String PASS = "root";
-    
     /* default constructor */
     public ProductDBManager() {
         
         /* establishes a new collection of products */
         productCollection = new ProductCollection();
+        
     }
     
     /* establishes connection with the MySQL database */
     public void initializeDBConnection() {
         
-        System.out.println("Attempting to establish database connection...\n");
+        if (debug) System.out.println("Attempting to establish database connection...\n");
 
         try {
             Class.forName(jdbcDriver);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             
-            if (conn != null) System.out.println("Connection established");
+            if (conn != null && debug) System.out.println("Connection established");
 
             /* creates a prepared statement and gets all the information */
             PreparedStatement ps = conn.prepareCall(query);
@@ -104,7 +100,7 @@ public class ProductDBManager {
                 Product newProduct = new Product();     
                 newProduct.setId(rs.getInt("id"));
                 newProduct.setName(rs.getString("name"));
-                newProduct.setPrice(rs.getInt("price"));
+                newProduct.setPrice(rs.getFloat("price"));
                 newProduct.setType(rs.getString("type"));
                 newProduct.setCategory(rs.getString("category"));
                 newProduct.setPageURL(rs.getString("page_url"));
