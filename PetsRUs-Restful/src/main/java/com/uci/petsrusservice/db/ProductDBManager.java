@@ -227,11 +227,13 @@ public class ProductDBManager {
     */
     public int deleteProduct(int id) {
         
-        //checks if a connection is established, starts connection if not 
+        /* establishes a connection with the database, if not already connected */
         checkConnection();     
         
         if (debug) System.out.println("Attempting to delete product id = " + id);
         int result = 0;
+        
+        /* executes delete query */
         try {
             deleteProductPreparedStatement = conn.prepareStatement(
                     "DELETE FROM product WHERE id = ?"

@@ -13,20 +13,20 @@ GENERAL WEBSITE INFORMATION
 Website URL: http://centaurus-1.ics.uci.edu:1045/index/
 
 General Description 
-PetsRUs is a simple, interactive e-commerce website generated with HTML, CSS, JS,
-Bootstrap, PHP, and Ajax. The website contains a homepage, about page, and multiple 
-product pages. Each product page contains a form that allows the user to input information,
-such as name, shipping address, and payment information, to buy the product, as per 
-project guidelines.
+PetsRUs is a simple, interactive e-commerce RESTful website generated with 
+HTML, CSS, JS,Bootstrap. The website contains a homepage, 
+about page, and multiple product pages. Each product page contains a form that 
+allows the user to input information, such as name, shipping address, and payment 
+information, to buy the product, as per project guidelines.
 
-index.php
+index.html
 The index.php file leads to the website's homepage. The top of the website has
 consists of a navigation bar that will take you to 3 sections: the homepage, 
 the about page, and the main (all) products page. The 3rd tab has a dropdown menu
 that will navigate to 4 different categories of pet items based on pet type (all, 
 dog, cat, and reptile). 
 
-about.php
+about.html
 The about.html page contains information about PetsRUs, including redirections to
 product pages and information about the management team. 
 
@@ -48,14 +48,47 @@ REQUIREMENTS SECTION
 1. Using JSP reimplement the product list page. This is the page that contains 
 the list of your products. 
 
-This requirement is fulfilled in the index.jsp. The product directory is
-retrieved from the database and displayed in the PetsRUs webpage. 
+This requirement is fulfilled in the allproducts.jsp file in src/product-pages. 
+The product directory is retrieved from the database and displayed as a webpage. 
 
 2. Create REST services to allow for interaction with the order and product 
 resources stored in your application database. You will need to implement 
 services that use the following verbs: GET, PUT, POST, DELETE
 
-TODO
+Implemented in Source Packages under petsruseservice.
+- petsrusservice: contains the ProductResource which performs all HTTP requests
+    (GET, POST, PUT, and DELETE) on the product table in the database
+- petsrusservice.db: contains the ProductDBManager which performs all database
+    connections and management operations (adding new products, deleting products,
+    updating products, getting database information, establishing database 
+    connection...)
+- petsusservice.model: contains the Product class which holds a product's 
+    information 
+- petsrusservice.service: establishes the petsrusservice to create the API
+
+******* Screenshots are located in Source Packages > examples directory *******
+Example commands via Postman: 
+    GET http://localhost:8080/PetsRUs-Restful/api/v1/products/
+        (retrives the database in JSON format)
+    POST http://localhost:8080/PetsRUs-Restful/api/v1/products/ 
+        (in x-www-form-urlencoded, adds a new product to the database via
+        product id)
+        id              1000000012
+        name            test12
+        price           12.99
+        type            toy
+        category        dog
+        summary         stuff
+        description     stuff
+        benefits        stuff
+        pageURL         n/a
+        imageURL        n/a
+    PUT http://localhost:8080/PetsRUs-Restful/api/v1/products/1000000011?
+       (in x-www-form-urlencoded, can change any parameter that is NOT id, 
+        updates an existing product in the database via product id)
+        name            newName
+    DELETE http://localhost:8080/PetsRUs-Restful/api/v1/products/1000000012?id=1000000012
+        (deletes a product from the database via product id)
 
 3. You will now need to replace all the database interactions in your web 
 application with REST calls. Your web application will now act as a REST client 
