@@ -3,7 +3,6 @@ package com.uci.petsrusservice.db;
 /* imports */
 import com.uci.petsrusservice.collections.ProductCollection;
 import com.uci.petsrusservice.model.Product;
-//import com.uci.petsrusservice.collections.ProductCollection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -226,22 +225,25 @@ public class ProductDBManager {
     * @param productId of the product to delete
     * @return int that database is updated
     */
-    public int deleteProduct(String id) {
+    public int deleteProduct(int id) {
+        
+        //checks if a connection is established, starts connection if not 
+        checkConnection();     
         
         if (debug) System.out.println("Attempting to delete product id = " + id);
         int result = 0;
         try {
-            //estbalishes connection with database to execute insert query
             deleteProductPreparedStatement = conn.prepareStatement(
-                    "DELETE FROM product WHERE id=? ;"
+                    "DELETE FROM product WHERE id = ?"
             );
-            deleteProductPreparedStatement.setString(1, id);
-            result = deleteProductPreparedStatement.executeUpdate();
+            System.out.println(deleteProductPreparedStatement);
+            deleteProductPreparedStatement.setInt(1, id);
+            result = deleteProductPreparedStatement.executeUpdate(); 
 
         } catch (SQLException e) {
+            System.out.println("ERROR HERE");
             e.printStackTrace();
         }
-        
         return result;
     }
         

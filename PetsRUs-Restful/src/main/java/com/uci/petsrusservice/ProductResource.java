@@ -14,7 +14,6 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("/v1/products/")
 public class ProductResource {
@@ -130,8 +129,9 @@ public class ProductResource {
      */
     @DELETE
     @Path("/{productId}")
-    public String deleteProductResouce(@PathParam("productId") String productId) {
-        productDBManager.deleteProduct(productId);
+    public String deleteProductResource(@PathParam("productId") int id) {   
+        System.out.println("In productdbmanager delete path....");
+        productDBManager.deleteProduct(id);       
         return getJsonDatabase();
     }
     
