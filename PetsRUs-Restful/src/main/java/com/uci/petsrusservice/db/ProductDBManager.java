@@ -19,12 +19,13 @@ public class ProductDBManager {
     private ResultSetMetaData rsmd = null;
     private int cols = 0;
     
-    /* database credentials */
+    /* database credentials and data members */
     private String jdbcDriver = "com.mysql.jdbc.Driver";  
     private String query = "select * from product";
     private String DB_URL="jdbc:mysql://localhost:3306/petsrus??serverTimezone=UTC&autoReconnect=true&useSSL=false";
     private String USER = "root";
     private String PASS = "root";
+    private PreparedStatement addProductPreparedStatement;
     
     /* create collection to hold our products */
     private ProductCollection productCollection ;
@@ -116,7 +117,89 @@ public class ProductDBManager {
             e.printStackTrace();
         }
     }
+
+    /* database operations */ 
+    /**
+     * Adds a new product to this productCollection
+     * @param name the name of the existing product
+     * @param id of the product to add (cannot be altered)
+     * @param name of the product to add
+     * @param price of the product to add
+     * @param type of the product to add
+     * @param category of the product to add
+     * @param page_url of the product to add
+     * @param image_url of the product to add
+     * @param summary of the product to add
+     * @param description of the product to add
+     * @param benefits of the product to add
+     * @return None
+     */
+    public int addProduct(int id, String name, float price, String type, 
+            String category, String page_url, String image_url, String summary, 
+            String description, String benefits) {
+         //checks if a connection is established, starts connection if not 
+        checkConnection();
+        
+        if (debug) System.out.println("Attempting to add new product id = " + id);
+
+        int result = 0;
+
+        try {
+            //estbalishes connection with database to execute insert query
+            addProductPreparedStatement = conn.prepareStatement(
+                    "INSERT INTO product ("
+                            + "id, name, price, type, category, page_url, "
+                            + "image_url, summary, description, benefits) "
+                            + "VALUES (?,?,?,?,?,?,?,?,?,?)");
+
+            addProductPreparedStatement.setInt(1, id);
+            addProductPreparedStatement.setString(2, name);
+            addProductPreparedStatement.setFloat(3, price);
+            addProductPreparedStatement.setString(4, type);
+            addProductPreparedStatement.setString(5, category);
+            addProductPreparedStatement.setString(6, page_url);
+            addProductPreparedStatement.setString(7, image_url);
+            addProductPreparedStatement.setString(8, summary);
+            addProductPreparedStatement.setString(9, description);
+            addProductPreparedStatement.setString(10, benefits);
+
+            
+            //executes insert query 
+            result = addProductPreparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;    
+    }
+
+    public void deleteProduct(String shipId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Updates a product in this productCollection
+     * @param name the name of the existing product
+     * @param id of the product to change (cannot be altered)
+     * @param name of the product to change
+     * @param price of the product to change
+     * @param type of the product to change
+     * @param category of the product to change
+     * @param page_url of the product to change
+     * @param image_url of the product to change
+     * @param summary of the product to change
+     * @param description of the product to change
+     * @param benefits of the product to change
+     * @return None
+     */
+    public void updateProduct(int id, String name, float price, String type, 
+            String category, String page_url, String image_url, String summary, 
+            String description, String benefits) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    /* establishes a connection with the database, if not already connected */
     private void checkConnection() {
         if (conn == null) {
             initializeDBConnection();
