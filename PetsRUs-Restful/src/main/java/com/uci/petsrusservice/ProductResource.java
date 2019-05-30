@@ -79,7 +79,7 @@ public class ProductResource {
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String addShipResource(@FormParam("id") int id, 
+    public String addProductResource(@FormParam("id") int id, 
             @FormParam("name") String name, @FormParam("price") float price,
             @FormParam("type") String type, @FormParam("category") String category,
             @FormParam("page_url") String page_url, @FormParam("image_url") String image_url,
@@ -109,10 +109,10 @@ public class ProductResource {
      */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{shipId}")
-    public String updateShipResource(@FormParam("name") String name, 
-            @PathParam("id") int id, @FormParam("price") float price,
-            @FormParam("type") String type, @FormParam("category") String category,
+    @Path("/{productId}")
+    public String updateProductResource(@PathParam("productId") int id, 
+            @FormParam("name") String name, @FormParam("price") float price,
+            @FormParam ("type") String type, @FormParam("category") String category,
             @FormParam("page_url") String page_url, @FormParam("image_url") String image_url,
             @FormParam("summary") String summary, @FormParam("description") String description,
             @FormParam("benefits") String benefits
@@ -128,9 +128,10 @@ public class ProductResource {
      * @return returns database after object deletion
      */
     @DELETE
-    @Path("/{shipId}")
-    public String deleteShipResource(@PathParam("shipId") String shipId) {
-        productDBManager.deleteProduct(shipId);
+    @Path("/{productId}")
+    public String deleteProductResource(@PathParam("productId") int id) {   
+        System.out.println("In productdbmanager delete path....");
+        productDBManager.deleteProduct(id);       
         return getJsonDatabase();
     }
     
