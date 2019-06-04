@@ -220,11 +220,11 @@ function handleClick(element)
     
     /* switch to main pet page */
     if (element == 'dog') window.location.href = "src/product-pages/dog.html";
-    else if (element == 'cat') window.location.href = "src/product-pages/cat.html";
+    else if (element == 'cat') window.location.href = "cat.html";
     else if (element == 'reptile') window.location.href = "src/product-pages/reptile.html";
 
     /* switch to dog pages */
-    else if (element == 1000000004) window.location.href = "dog-pages/dog-food.html";
+    else if (element == 1000000004) window.location.href = "dog-pages/dog-food.jsp";
     else if (element == 1000000006) window.location.href = "dog-pages/dog-toy.html";
     else if (element == 1000000005) window.location.href = "dog-pages/dog-harness.html";
     else if (element == 1000000007) window.location.href = "dog-pages/dog-treat.html";

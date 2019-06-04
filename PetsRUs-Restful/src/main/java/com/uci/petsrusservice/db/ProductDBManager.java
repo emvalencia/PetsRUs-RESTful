@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import com.uci.petsrusservice.db.DBConnect;
 
 public class ProductDBManager {
     
@@ -19,11 +20,7 @@ public class ProductDBManager {
     private int cols = 0;
     
     /* database credentials and prepared statement queries */
-    private String jdbcDriver = "com.mysql.jdbc.Driver";  
     private String query = "select * from product";
-    private String DB_URL="jdbc:mysql://localhost:3306/petsrus??serverTimezone=UTC&autoReconnect=true&useSSL=false";
-    private String USER = "root";
-    private String PASS = "root";
     private PreparedStatement addProductPreparedStatement;
     private PreparedStatement updateProductPreparedStatement;
     private PreparedStatement deleteProductPreparedStatement;
@@ -48,10 +45,10 @@ public class ProductDBManager {
         if (debug) System.out.println("Attempting to establish database connection...\n");
 
         try {
-            Class.forName(jdbcDriver);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            DBConnect db = new DBConnect();
+            conn = db.getConnection();
             
-            if (conn != null && debug) System.out.println("Connection established");
+            if (conn != null) System.out.println("Connection established");
 
             /* creates a prepared statement and gets all the information */
             PreparedStatement ps = conn.prepareCall(query);
@@ -63,8 +60,6 @@ public class ProductDBManager {
 
             // rs.close();
             //conn.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
