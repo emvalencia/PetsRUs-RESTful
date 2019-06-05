@@ -212,7 +212,7 @@ function handleClick(element)
     /* switch to reptile pages */
     else if (element == 'reptile-food') window.location.href = "reptile-pages/reptile-food.html";
     else if (element == 'reptile-habitat') window.location.href = "reptile-pages/reptile-habitat.html";
-    else if (element == 'reptile-meds') window.location.href = "reptile-pages/reptile-meds.html";
+    else if (element == 'reptile-meds') window.location.href = "reptile-pages/reptile-meds.jsp";
     
     /*
      * Java Servlet Workaround 
@@ -237,7 +237,7 @@ function handleClick(element)
     /* switch to reptile pages */
     else if (element == 1000000008) window.location.href = "reptile-pages/reptile-food.html";
     else if (element == 1000000009) window.location.href = "reptile-pages/reptile-habitat.html";
-    else if (element == 1000000010) window.location.href = "reptile-pages/reptile-meds.html";
+    else if (element == 1000000010) window.location.href = "reptile-pages/reptile-meds.jsp";
     
     /* else */
     // window.location.href = "../error-page.html";
