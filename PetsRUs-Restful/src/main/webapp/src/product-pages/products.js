@@ -199,7 +199,7 @@ function handleClick(element)
     else if (element == 'reptile') window.location.href = "reptile.html";
 
     /* switch to dog pages */
-    else if (element == 'dog-food') window.location.href = "dog-pages/dog-food.html";
+    else if (element == 'dog-food') window.location.href = "dog-pages/dog-food.jsp";
     else if (element == 'dog-toy') window.location.href = "dog-pages/dog-toy.html";
     else if (element == 'dog-harness') window.location.href = "dog-pages/dog-harness.html";
     else if (element == 'dog-treat') window.location.href = "dog-pages/dog-treat.html";
