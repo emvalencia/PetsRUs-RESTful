@@ -207,7 +207,7 @@ function handleClick(element)
     /* switch to cat pages */
     else if (element == 'cat-food') window.location.href = "cat-pages/cat-food.html";
     else if (element == 'cat-playground') window.location.href = "cat-pages/cat-playground.html";
-    else if (element == 'cat-carrier') window.location.href = "cat-pages/cat-carrier.html";
+    else if (element == 'cat-carrier') window.location.href = "cat-pages/cat-carrier.jsp";
 
     /* switch to reptile pages */
     else if (element == 'reptile-food') window.location.href = "reptile-pages/reptile-food.html";
@@ -232,7 +232,7 @@ function handleClick(element)
     /* switch to cat pages */
     else if (element == 1000000002) window.location.href = "cat-pages/cat-food.html";
     else if (element == 1000000003) window.location.href = "cat-pages/cat-playground.html";
-    else if (element == 1000000001) window.location.href = "cat-pages/cat-carrier.html";
+    else if (element == 1000000001) window.location.href = "cat-pages/cat-carrier.jsp";
 
     /* switch to reptile pages */
     else if (element == 1000000008) window.location.href = "reptile-pages/reptile-food.html";
