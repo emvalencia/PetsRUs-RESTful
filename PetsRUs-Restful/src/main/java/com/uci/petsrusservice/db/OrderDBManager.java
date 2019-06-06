@@ -39,7 +39,7 @@ public class OrderDBManager {
         try {
             //estbalishes connection with database to execute insert query
             addOrderPreparedStatement = conn.prepareStatement(
-                    "INSERT INTO  OrderDetails("
+                    "INSERT INTO OrderDetails("
                             + "order_num, price, product_id, qty, fname, lname,"
                             + "email, phone, address, state, city, zip,"
                             + "shipping_option, cc_num, csc_num, card_type) "

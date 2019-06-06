@@ -27,8 +27,8 @@ public class DBConnect {
     private String jdbcDriver = "com.mysql.jdbc.Driver";  
     private String query = "select * from product";
     private String DB_URL="jdbc:mysql://localhost:3306/petsrus??serverTimezone=UTC&autoReconnect=true&useSSL=false";
-    private String USER = "joey";
-    private String PASS = "123456789";
+    private String USER = "root";
+    private String PASS = "root";
     
     public Connection getConnection()
     {

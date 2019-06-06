@@ -57,16 +57,21 @@ services that use the following verbs: GET, PUT, POST, DELETE
 
 Implemented in Source Packages under petsruseservice.
 - petsrusservice: contains the ProductResource which performs all HTTP requests
-    (GET, POST, PUT, and DELETE) on the product table in the database
+    (GET, POST, PUT, and DELETE) on the product table in the database. Contains
+    OrderResource which performs POST request for the order form to submit to 
+    the database.
 - petsrusservice.db: contains the ProductDBManager which performs all database
     connections and management operations (adding new products, deleting products,
     updating products, getting database information, establishing database 
-    connection...)
+    connection...). Contains the OrderDBManager which performs all database
+    connections and management operations (add orders to database).
 - petsusservice.model: contains the Product class which holds a product's 
-    information 
-- petsrusservice.service: establishes the petsrusservice to create the API
+    information.
+- petsrusservice.service: establishes the petsrusservice to create the API.
 
-******* Screenshots are located in Source Packages > examples directory *******
+*******************************************************************************
+        Screenshots are located in Source Packages > examples directory
+*******************************************************************************
 Example commands via Postman: 
     GET http://localhost:8080/PetsRUs-Restful/api/v1/products/
         (retrives the database in JSON format)
@@ -107,9 +112,97 @@ each RESTful service method that you implement. Your documentation should includ
 the following at the very least: Method Type, Request URL, Sample Response, 
 Sample Request (if applicable)
 
-Service:            TODO
-Method type:        TODO
-Request URL:        TODO
+/-------------------------------------------------------------------------------
+Products:
+Method type:    GET (all products)
+Request URL:    http://localhost:8080/PetsRUs-Restful/api/v1/products/
+Sample response:    
+{
+    "productDatabase": [
+        {
+            "id": 1000000001,
+            "name": "Petmate® Compass Fashion Pet Carrier",
+            "price": 29.99,
+            "type": "other",
+            "category": "cat",
+            "summary": "The Petmate cat carrier comes in a bright hot pink color 
+                        and is perfect for most cat sizes! It has Quick Slide N 
+                        Snap technology that allows for easy assembly. It also 
+                        provides 360-degree ventilation and has a 
+                        Quick-Latch-2-way door.",
+            "description": "Redefine pet training and transportation with the 
+                        Petmate Compass. This crate comes with a straightforward 
+                        assembly process that takes only seconds, so you waste 
+                        less time setting up and more time getting out. It's the 
+                        perfect companion for traveling and potty training your 
+                        new pup. With Petmate's Quick-Latch design, increased 
+                        ventilation and larger doorway size, the Compass combines 
+                        the ultimate convenience for pet parents and extra 
+                        comfort for pets. Travel and train in style with a 
+                        kennel that takes ingenuity to new heights.",
+            "benefits": "Quick Slide 'N Snap assembly allows quick assembly 
+                        without tools. 360-degree ventilation & visibility means 
+                        a more comfortable journey for your pet. Additional 
+                        doorway size for comfort. Meets most airlines 
+                        requirements. Quick-Latch 2-Way door design opens left 
+                        or right, and stays closed with safeguard door bars at 
+                        top and bottom.",
+            "imageURL": "cat-carrier.jpg",
+            "pageURL": "/src/product-pages/cat-pages/cat-carrier.php"
+        },
+        ...... (whole database) 
+}
+Sample request: http://localhost:8080/PetsRUs-Restful/api/v1/products/ 
+
+Method type:    GET (individual product)
+Request URL:    http://localhost:8080/PetsRUs-Restful/api/v1/products/1000000001
+Sample response:    
+{
+    "id": 1000000001,
+    "name": "Petmate® Compass Fashion Pet Carrier",
+    "price": 29.99,
+    "type": "other",
+    "category": "cat",
+    "summary": "The Petmate cat carrier comes in a bright hot pink color and is 
+                perfect for most cat sizes! It has Quick Slide N Snap technology 
+                that allows for easy assembly. It also provides 360-degree 
+                ventilation and has a Quick-Latch-2-way door.",
+    "description": "Redefine pet training and transportation with the Petmate 
+                Compass. This crate comes with a straightforward assembly process 
+                that takes only seconds, so you waste less time setting up and 
+                more time getting out. It's the perfect companion for traveling 
+                and potty training your new pup. With Petmate's Quick-Latch 
+                design, increased ventilation and larger doorway size, the 
+                Compass combines the ultimate convenience for pet parents and 
+                extra comfort for pets. Travel and train in style with a kennel 
+                that takes ingenuity to new heights.",
+    "benefits": "Quick Slide 'N Snap assembly allows quick assembly without         
+                tools. 360-degree ventilation & visibility means a more 
+                comfortable journey for your pet. Additional doorway size for 
+                comfort. Meets most airlines requirements. Quick-Latch 2-Way 
+                door design opens left or right, and stays closed with safeguard 
+                door bars at top and bottom.",
+    "imageURL": "cat-carrier.jpg",
+    "pageURL": "/src/product-pages/cat-pages/cat-carrier.php"
+}
+Sample request:     http://localhost:8080/PetsRUs-Restful/api/v1/products/1000000001
+
+Method type:        PUT
+Request URL:        http://localhost:8080/PetsRUs-Restful/api/v1/products/id
+Sample response:    (updates entire database, displays whole database in Postman)
+Sample request:     http://localhost:8080/PetsRUs-Restful/api/v1/products/
+                    1000000001?id=1000000001
+
+Method type:        DELETE
+Request URL:        http://localhost:8080/PetsRUs-Restful/api/v1/products/id
+Sample response:    (updates entire database, displays whole database in Postman)
+Sample request:     http://localhost:8080/PetsRUs-Restful/api/v1/products/
+                    1000000001?id=1000000001
+
+/-------------------------------------------------------------------------------
+Orders:
+Method type:        POST
+Request URL:        http://localhost:8080/PetsRUs-Restful/api/v1/products/
 Sample response:    TODO
 Sample request:     TODO
 
