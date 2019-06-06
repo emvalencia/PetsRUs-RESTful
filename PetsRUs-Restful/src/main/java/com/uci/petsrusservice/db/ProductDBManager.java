@@ -3,13 +3,13 @@ package com.uci.petsrusservice.db;
 /* imports */
 import com.uci.petsrusservice.collections.ProductCollection;
 import com.uci.petsrusservice.model.Product;
-//import com.uci.petsrusservice.collections.ProductCollection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import com.uci.petsrusservice.db.DBConnect;
 
 public class ProductDBManager {
     
@@ -19,13 +19,11 @@ public class ProductDBManager {
     private ResultSetMetaData rsmd = null;
     private int cols = 0;
     
-    /* database credentials and data members */
-    private String jdbcDriver = "com.mysql.jdbc.Driver";  
+    /* database credentials and prepared statement queries */
     private String query = "select * from product";
-    private String DB_URL="jdbc:mysql://localhost:3306/petsrus??serverTimezone=UTC&autoReconnect=true&useSSL=false";
-    private String USER = "root";
-    private String PASS = "root";
     private PreparedStatement addProductPreparedStatement;
+    private PreparedStatement updateProductPreparedStatement;
+    private PreparedStatement deleteProductPreparedStatement;
     
     /* create collection to hold our products */
     private ProductCollection productCollection ;
@@ -47,10 +45,10 @@ public class ProductDBManager {
         if (debug) System.out.println("Attempting to establish database connection...\n");
 
         try {
-            Class.forName(jdbcDriver);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            DBConnect db = new DBConnect();
+            conn = db.getConnection();
             
-            if (conn != null && debug) System.out.println("Connection established");
+            if (conn != null) System.out.println("Connection established");
 
             /* creates a prepared statement and gets all the information */
             PreparedStatement ps = conn.prepareCall(query);
@@ -62,8 +60,6 @@ public class ProductDBManager {
 
             // rs.close();
             //conn.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,18 +128,17 @@ public class ProductDBManager {
      * @param summary of the product to add
      * @param description of the product to add
      * @param benefits of the product to add
-     * @return None
+     * @return int that database is updated
      */
     public int addProduct(int id, String name, float price, String type, 
             String category, String page_url, String image_url, String summary, 
             String description, String benefits) {
+        
          //checks if a connection is established, starts connection if not 
-        checkConnection();
+        checkConnection();       
         
         if (debug) System.out.println("Attempting to add new product id = " + id);
-
         int result = 0;
-
         try {
             //estbalishes connection with database to execute insert query
             addProductPreparedStatement = conn.prepareStatement(
@@ -151,7 +146,6 @@ public class ProductDBManager {
                             + "id, name, price, type, category, page_url, "
                             + "image_url, summary, description, benefits) "
                             + "VALUES (?,?,?,?,?,?,?,?,?,?)");
-
             addProductPreparedStatement.setInt(1, id);
             addProductPreparedStatement.setString(2, name);
             addProductPreparedStatement.setFloat(3, price);
@@ -162,9 +156,6 @@ public class ProductDBManager {
             addProductPreparedStatement.setString(8, summary);
             addProductPreparedStatement.setString(9, description);
             addProductPreparedStatement.setString(10, benefits);
-
-            
-            //executes insert query 
             result = addProductPreparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -174,12 +165,8 @@ public class ProductDBManager {
         return result;    
     }
 
-    public void deleteProduct(String shipId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
-     * Updates a product in this productCollection
+     * Updates a product in this productCollection and database
      * @param name the name of the existing product
      * @param id of the product to change (cannot be altered)
      * @param name of the product to change
@@ -191,14 +178,72 @@ public class ProductDBManager {
      * @param summary of the product to change
      * @param description of the product to change
      * @param benefits of the product to change
-     * @return None
+     * @return int that database is updated
      */
-    public void updateProduct(int id, String name, float price, String type, 
+    public int updateProduct(int id, String name, float price, String type, 
             String category, String page_url, String image_url, String summary, 
             String description, String benefits) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //checks if a connection is established, starts connection if not 
+        checkConnection();       
+        
+        if (debug) System.out.println("Attempting to update product id = " + id);
+        int result = 0;
+        try {
+            //estbalishes connection with database to execute insert query
+            updateProductPreparedStatement = conn.prepareStatement(
+                    "UPDATE product SET "
+                            + "name=?, price=?, type=?, category=?, page_url=?,"
+                            + "image_url=?, summary=?, description=?, benefits=? "
+                            + "WHERE id=?;"
+            );
+            updateProductPreparedStatement.setString(1, name);
+            updateProductPreparedStatement.setFloat(2, price);
+            updateProductPreparedStatement.setString(3, type);
+            updateProductPreparedStatement.setString(4, category);
+            updateProductPreparedStatement.setString(5, page_url);
+            updateProductPreparedStatement.setString(6, image_url);
+            updateProductPreparedStatement.setString(7, summary);
+            updateProductPreparedStatement.setString(8, description);
+            updateProductPreparedStatement.setString(9, benefits);
+            updateProductPreparedStatement.setInt(10, id);
+            result = updateProductPreparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;  
     }
     
+    /**
+    * deletes a product in this productCollection from the database
+    * @param productId of the product to delete
+    * @return int that database is updated
+    */
+    public int deleteProduct(int id) {
+        
+        /* establishes a connection with the database, if not already connected */
+        checkConnection();     
+        
+        if (debug) System.out.println("Attempting to delete product id = " + id);
+        int result = 0;
+        
+        /* executes delete query */
+        try {
+            deleteProductPreparedStatement = conn.prepareStatement(
+                    "DELETE FROM product WHERE id = ?"
+            );
+            System.out.println(deleteProductPreparedStatement);
+            deleteProductPreparedStatement.setInt(1, id);
+            result = deleteProductPreparedStatement.executeUpdate(); 
+
+        } catch (SQLException e) {
+            System.out.println("ERROR HERE");
+            e.printStackTrace();
+        }
+        return result;
+    }
+        
     /* establishes a connection with the database, if not already connected */
     private void checkConnection() {
         if (conn == null) {

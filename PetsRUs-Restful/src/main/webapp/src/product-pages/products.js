@@ -199,20 +199,20 @@ function handleClick(element)
     else if (element == 'reptile') window.location.href = "reptile.html";
 
     /* switch to dog pages */
-    else if (element == 'dog-food') window.location.href = "dog-pages/dog-food.html";
-    else if (element == 'dog-toy') window.location.href = "dog-pages/dog-toy.html";
-    else if (element == 'dog-harness') window.location.href = "dog-pages/dog-harness.html";
-    else if (element == 'dog-treat') window.location.href = "dog-pages/dog-treat.html";
+    else if (element == 'dog-food') window.location.href = "dog-pages/dog-food.jsp";
+    else if (element == 'dog-toy') window.location.href = "dog-pages/dog-toy.jsp";
+    else if (element == 'dog-harness') window.location.href = "dog-pages/dog-harness.jsp";
+    else if (element == 'dog-treat') window.location.href = "dog-pages/dog-treat.jsp";
 
     /* switch to cat pages */
-    else if (element == 'cat-food') window.location.href = "cat-pages/cat-food.html";
-    else if (element == 'cat-playground') window.location.href = "cat-pages/cat-playground.html";
-    else if (element == 'cat-carrier') window.location.href = "cat-pages/cat-carrier.html";
+    else if (element == 'cat-food') window.location.href = "cat-pages/cat-food.jsp";
+    else if (element == 'cat-playground') window.location.href = "cat-pages/cat-playground.jsp";
+    else if (element == 'cat-carrier') window.location.href = "cat-pages/cat-carrier.jsp";
 
     /* switch to reptile pages */
-    else if (element == 'reptile-food') window.location.href = "reptile-pages/reptile-food.html";
-    else if (element == 'reptile-habitat') window.location.href = "reptile-pages/reptile-habitat.html";
-    else if (element == 'reptile-meds') window.location.href = "reptile-pages/reptile-meds.html";
+    else if (element == 'reptile-food') window.location.href = "reptile-pages/reptile-food.jsp";
+    else if (element == 'reptile-habitat') window.location.href = "reptile-pages/reptile-habitat.jsp";
+    else if (element == 'reptile-meds') window.location.href = "reptile-pages/reptile-meds.jsp";
     
     /*
      * Java Servlet Workaround 
@@ -220,24 +220,24 @@ function handleClick(element)
     
     /* switch to main pet page */
     if (element == 'dog') window.location.href = "src/product-pages/dog.html";
-    else if (element == 'cat') window.location.href = "src/product-pages/cat.html";
+    else if (element == 'cat') window.location.href = "cat.html";
     else if (element == 'reptile') window.location.href = "src/product-pages/reptile.html";
 
     /* switch to dog pages */
-    else if (element == 1000000004) window.location.href = "dog-pages/dog-food.html";
-    else if (element == 1000000006) window.location.href = "dog-pages/dog-toy.html";
-    else if (element == 1000000005) window.location.href = "dog-pages/dog-harness.html";
-    else if (element == 1000000007) window.location.href = "dog-pages/dog-treat.html";
+    else if (element == 1000000004) window.location.href = "dog-pages/dog-food.jsp";
+    else if (element == 1000000006) window.location.href = "dog-pages/dog-toy.jsp";
+    else if (element == 1000000005) window.location.href = "dog-pages/dog-harness.jsp";
+    else if (element == 1000000007) window.location.href = "dog-pages/dog-treat.jsp";
 
     /* switch to cat pages */
-    else if (element == 1000000002) window.location.href = "cat-pages/cat-food.html";
-    else if (element == 1000000003) window.location.href = "cat-pages/cat-playground.html";
-    else if (element == 1000000001) window.location.href = "cat-pages/cat-carrier.html";
+    else if (element == 1000000002) window.location.href = "cat-pages/cat-food.jsp";
+    else if (element == 1000000003) window.location.href = "cat-pages/cat-playground.jsp";
+    else if (element == 1000000001) window.location.href = "cat-pages/cat-carrier.jsp";
 
     /* switch to reptile pages */
-    else if (element == 1000000008) window.location.href = "reptile-pages/reptile-food.html";
-    else if (element == 1000000009) window.location.href = "reptile-pages/reptile-habitat.html";
-    else if (element == 1000000010) window.location.href = "reptile-pages/reptile-meds.html";
+    else if (element == 1000000008) window.location.href = "reptile-pages/reptile-food.jsp";
+    else if (element == 1000000009) window.location.href = "reptile-pages/reptile-habitat.jsp";
+    else if (element == 1000000010) window.location.href = "reptile-pages/reptile-meds.jsp";
     
     /* else */
     // window.location.href = "../error-page.html";

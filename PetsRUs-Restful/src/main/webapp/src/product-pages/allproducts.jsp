@@ -1,3 +1,4 @@
+<%@page import="com.uci.petsrusservice.db.DBConnect"%>
 <%@page contentType="text/html"%> 
 <%@page pageEncoding="UTF-8"%> 
 <%@page import="java.sql.*"%> 
@@ -11,19 +12,8 @@
         
     <% 
     try { 
-        /* jdbc driver */
-        final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-        
-        /* database url - ssl false is required to avoid perission errors */
-        final String DB_URL="jdbc:mysql://localhost:3306/petsrus?serverTimezone=UTC&autoReconnect=true&useSSL=false";
-
-        /* database credentials */
-        final String USER = "joey";
-        final String PASS = "123456789";
-        
-        /* database access */
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        DBConnect db = new DBConnect();
+        Connection conn = db.getConnection();
 
         /* sql query and execution */
         Statement stmt = conn.createStatement();

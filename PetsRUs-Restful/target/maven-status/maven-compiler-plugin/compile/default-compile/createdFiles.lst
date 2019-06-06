@@ -1,5 +1,5 @@
-com/uci/petsrusservice/db/ProductDBManager.class
-com/uci/petsrusservice/service/PetsRUsService.class
-com/uci/petsrusservice/model/Product.class
-com/uci/petsrusservice/ProductResource.class
-com/uci/petsrusservice/collections/ProductCollection.class
+com\uci\petsrusservice\collections\ProductCollection.class
+com\uci\petsrusservice\ProductResource.class
+com\uci\petsrusservice\service\PetsRUsService.class
+com\uci\petsrusservice\db\ProductDBManager.class
+com\uci\petsrusservice\model\Product.class
