@@ -70,7 +70,11 @@ Implemented in Source Packages under petsruseservice.
 - petsrusservice.service: establishes the petsrusservice to create the API.
 
 *******************************************************************************
+        
+    PLEASE NOTE:
         Screenshots are located in Source Packages > examples directory
+
+
 *******************************************************************************
 Example commands via Postman: 
     GET http://localhost:8080/PetsRUs-Restful/api/v1/products/
@@ -202,9 +206,16 @@ Sample request:     http://localhost:8080/PetsRUs-Restful/api/v1/products/
 /-------------------------------------------------------------------------------
 Orders:
 Method type:        POST
-Request URL:        http://localhost:8080/PetsRUs-Restful/api/v1/products/
-Sample response:    TODO
-Sample request:     TODO
+Request URL:        http://localhost:8080/PetsRUs-Restful/api/v1/orders
+Sample response:    (in screenshots)
+Sample request:     (in screenshots)
+
+/-------------------------------------------------------------------------------
+Note:
+- RESTful services are all implemented in the petsruservices package in petsrus
+- GET, POST, PUT, and DELETE requests were implemented and are explained above
+- Screenshots of all working requests via Postman testing are available in the
+    /examples directory
 
 /------------------------------------------------------------------------------
 ADDITIONAL INFORMATION
